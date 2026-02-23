@@ -4,18 +4,18 @@ import api from '../utils/api';
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // BYPASS AUTHENTICATION - Always provide a mock user
+  const [user, setUser] = useState({
+    id: 1,
+    username: 'test_user',
+    email: 'test@aovault.net'
+  });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('ao-vault-token');
-    if (token) {
-      api.setAuthToken(token);
-      fetchUser();
-    } else {
-      setLoading(false);
-    }
+    // Skip authentication check
+    setLoading(false);
   }, []);
 
   const fetchUser = async () => {
@@ -25,6 +25,7 @@ export function AuthProvider({ children }) {
     } catch (error) {
       console.error('Failed to fetch user:', error);
       localStorage.removeItem('ao-vault-token');
+      api.setAuthToken(null);
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import express from 'express';
 import db from '../database/index.js';
 import { authenticateUser } from '../middleware/auth.js';
-import ao3Scraper from '../utils/ao3-scraper.js';
+import ao3Scraper from '../utils/ao3-puppeteer.js';
 
 const router = express.Router();
 
@@ -125,10 +125,20 @@ router.get('/', authenticateUser, async (req, res) => {
 // Save a new fanfiction
 router.post('/', authenticateUser, async (req, res) => {
   try {
-    const { url, folderId, tags } = req.body;
+    const {
+      url,
+      folderId,
+      tags,
+      title,
+      author,
+      summary,
+      relationships,
+      fandoms,
+      rating
+    } = req.body;
 
-    if (!url) {
-      return res.status(400).json({ error: 'URL is required' });
+    if (!url && !title) {
+      return res.status(400).json({ error: 'URL or title is required' });
     }
 
     // Check if already saved
@@ -144,16 +154,22 @@ router.post('/', authenticateUser, async (req, res) => {
       });
     }
 
-    // Fetch metadata from AO3
+    // Fetch metadata from AO3 or use manual data
     let metadata;
-    if (url.includes('archiveofourown.org')) {
+    if (url && url.includes('archiveofourown.org') && !url.includes('/manual/')) {
       try {
         metadata = await ao3Scraper.fetchMetadata(url);
       } catch (error) {
         console.error('Scraping error:', error);
-        // Allow manual entry if scraping fails - but extract work ID from URL
-        const workIdMatch = url.match(/works\/(\d+)/);
-        const workId = workIdMatch ? workIdMatch[1] : Date.now().toString();
+        // Fall back to manual data
+        metadata = null;
+      }
+    }
+
+    // Use manual data if provided or scraping failed
+    if (!metadata) {
+      const workIdMatch = url ? url.match(/works\/(\d+)/) : null;
+      const workId = workIdMatch ? workIdMatch[1] : Date.now().toString();
 
         // For the specific fic mentioned, let's add some fallback data
         metadata = {
@@ -174,11 +190,6 @@ router.post('/', authenticateUser, async (req, res) => {
           complete: false,
           status: 'active'
         };
-      }
-    } else {
-      return res.status(400).json({
-        error: 'Currently only AO3 links are supported'
-      });
     }
 
     // Start transaction

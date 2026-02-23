@@ -18,7 +18,10 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
 
   const passwordRequirements = [
-    { met: formData.password.length >= 4, text: 'At least 4 characters' },
+    { met: formData.password.length >= 8, text: 'At least 8 characters' },
+    { met: /[A-Z]/.test(formData.password), text: 'One uppercase letter' },
+    { met: /[a-z]/.test(formData.password), text: 'One lowercase letter' },
+    { met: /[0-9]/.test(formData.password), text: 'One number' },
   ];
 
   const handleSubmit = async (e) => {

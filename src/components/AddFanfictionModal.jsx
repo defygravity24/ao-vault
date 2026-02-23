@@ -6,15 +6,6 @@ import { X, Loader } from 'lucide-react';
 export default function AddFanfictionModal({ onClose }) {
   const [url, setUrl] = useState('');
   const [tags, setTags] = useState('');
-  const [manualMode, setManualMode] = useState(false);
-  const [manualData, setManualData] = useState({
-    title: '',
-    author: '',
-    summary: '',
-    relationships: '',
-    fandoms: '',
-    rating: ''
-  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const queryClient = useQueryClient();
@@ -26,7 +17,7 @@ export default function AddFanfictionModal({ onClose }) {
       onClose();
     },
     onError: (error) => {
-      setError(error.response?.data?.error || 'Failed to save fanfiction');
+      setError(error.response?.data?.error || 'Failed to save fanfiction. Please try again.');
       setLoading(false);
     }
   });
@@ -34,155 +25,82 @@ export default function AddFanfictionModal({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Validate URL
+    if (!url) {
+      setError('Please enter an AO3 URL');
+      return;
+    }
+
+    if (!url.includes('archiveofourown.org')) {
+      setError('Please enter a valid AO3 URL (https://archiveofourown.org/works/...)');
+      return;
+    }
+
     setLoading(true);
 
-    const tagArray = tags.split(',').map(t => t.trim()).filter(t => t);
+    const tagArray = tags ? tags.split(',').map(t => t.trim()).filter(t => t) : [];
 
     const data = {
       url,
       tags: tagArray
     };
 
-    // Add manual data if in manual mode
-    if (manualMode) {
-      data.title = manualData.title;
-      data.author = manualData.author;
-      data.summary = manualData.summary;
-      data.relationships = manualData.relationships;
-      data.fandoms = manualData.fandoms;
-      data.rating = manualData.rating;
-    }
-
     saveMutation.mutate(data);
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl max-w-md w-full p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold">Add Fanfiction</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+      <div className="bg-gray-900 border border-gray-800 rounded-xl max-w-md w-full p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-white">Add Fanfiction</h2>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-1 hover:bg-gray-800 rounded-lg transition-colors"
           >
-            <X className="w-5 h-5 text-gray-500" />
+            <X className="w-5 h-5 text-gray-400" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-900/20 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
 
           <div>
-            <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="url" className="block text-sm font-medium text-gray-300 mb-2">
               AO3 URL
             </label>
             <input
-              type="url"
+              type="text"
               id="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              required
-              placeholder="https://archiveofourown.org/works/..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="https://archiveofourown.org/works/12345678"
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-100 placeholder-gray-500"
+              autoFocus
             />
             <p className="mt-1 text-xs text-gray-500">
-              Currently only Archive of Our Own links are supported
+              Just paste the AO3 link and we'll fetch all the details
             </p>
           </div>
-
-          {/* Manual entry toggle */}
-          <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg border border-amber-200">
-            <p className="text-sm text-amber-800">
-              Having trouble? Enter details manually
-            </p>
-            <button
-              type="button"
-              onClick={() => setManualMode(!manualMode)}
-              className="text-sm font-medium text-amber-900 hover:text-amber-700"
-            >
-              {manualMode ? 'Hide' : 'Show'} Manual Entry
-            </button>
-          </div>
-
-          {/* Manual entry fields */}
-          {manualMode && (
-            <>
-              <div>
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  value={manualData.title}
-                  onChange={(e) => setManualData({...manualData, title: e.target.value})}
-                  placeholder="Enter the fanfiction title"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-2">
-                  Author
-                </label>
-                <input
-                  type="text"
-                  id="author"
-                  value={manualData.author}
-                  onChange={(e) => setManualData({...manualData, author: e.target.value})}
-                  placeholder="Enter the author's name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="relationships" className="block text-sm font-medium text-gray-700 mb-2">
-                  Ship/Relationships
-                </label>
-                <input
-                  type="text"
-                  id="relationships"
-                  value={manualData.relationships}
-                  onChange={(e) => setManualData({...manualData, relationships: e.target.value})}
-                  placeholder="e.g., Harry Potter/Draco Malfoy"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-2">
-                  Summary
-                </label>
-                <textarea
-                  id="summary"
-                  value={manualData.summary}
-                  onChange={(e) => setManualData({...manualData, summary: e.target.value})}
-                  placeholder="Enter a brief summary"
-                  rows="3"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-              </div>
-            </>
-          )}
 
           <div>
-            <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-2">
-              Tags (optional)
+            <label htmlFor="tags" className="block text-sm font-medium text-gray-300 mb-2">
+              Custom Tags (Optional)
             </label>
             <input
               type="text"
               id="tags"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              placeholder="to-read, favorite, angst"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="to-read, favorite, comfort fic"
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-100 placeholder-gray-500"
             />
             <p className="mt-1 text-xs text-gray-500">
-              Separate multiple tags with commas
+              Add your own tags, separated by commas
             </p>
           </div>
 
@@ -190,19 +108,19 @@ export default function AddFanfictionModal({ onClose }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+              className="px-4 py-2 text-gray-300 hover:bg-gray-800 rounded-lg transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              disabled={loading}
-              className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading || !url}
+              className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <span className="flex items-center">
                   <Loader className="w-4 h-4 mr-2 animate-spin" />
-                  Saving...
+                  Fetching...
                 </span>
               ) : (
                 'Save Fanfiction'

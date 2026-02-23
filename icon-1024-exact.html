@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO Vault Icon - 1024x1024 Exact Size</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        .container {
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .instructions {
+            color: white;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .instructions h1 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .instructions p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .icon-exact {
+            width: 1024px;
+            height: 1024px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 233px; /* iOS rounds at ~22.75% */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-exact .ao-text {
+            font-size: 360px;
+            font-weight: 300;
+            color: #495057;
+            letter-spacing: -16px;
+            line-height: 1;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            margin-top: -20px;
+        }
+
+        .icon-exact .vault-text {
+            font-size: 88px;
+            font-weight: 500;
+            color: #6c757d;
+            letter-spacing: 24px;
+            text-transform: uppercase;
+            margin-left: 24px; /* Compensate for letter-spacing */
+        }
+
+        /* Subtle inner shadow for depth */
+        .icon-exact::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 233px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+            pointer-events: none;
+        }
+
+        .size-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+
+        code {
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            color: #0fa;
+        }
+
+        .tip {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .tip strong {
+            color: #0fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="instructions">
+            <h1>📱 AO Vault Icon - Exact 1024×1024px</h1>
+            <p>This icon is displayed at exactly 1024×1024 pixels - the required App Store size.</p>
+            <p>Take a screenshot of just the icon below (Cmd+Shift+4 and drag to select).</p>
+            <div class="tip">
+                <strong>Quick Screenshot:</strong> Press <code>Cmd+Shift+4</code>, then drag to select only the icon.
+                The screenshot will be saved to your Desktop as a PNG file, ready to use!
+            </div>
+        </div>
+
+        <div style="position: relative;">
+            <div class="icon-exact">
+                <span class="ao-text">AO</span>
+                <span class="vault-text">VAULT</span>
+            </div>
+            <div class="size-indicator">1024 × 1024px</div>
+        </div>
+
+        <div class="instructions">
+            <p style="color: #666; font-size: 12px; margin-top: 20px;">
+                After taking the screenshot, rename it to <code>icon-1024.png</code> and run the icon generator script.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

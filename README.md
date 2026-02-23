@@ -4,7 +4,9 @@ A modern fanfiction management platform that helps avid readers save, organize, 
 
 ## 🚀 Live Demo
 
-The application is now running at: **http://localhost:5173**
+**Production:** https://ao-vault-kmqu5gtq2-christina-coopers-projects.vercel.app
+**Custom Domain:** https://aovault.net (DNS configuration pending)
+**Local Development:** http://localhost:5173
 
 ## ✨ Features
 

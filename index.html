@@ -13,5 +13,19 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Ko-fi Widget (will only show when you have a Ko-fi account) -->
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script>
+      // Only initialize if on production site
+      if (window.location.hostname === 'aovault.net' || window.location.hostname === 'www.aovault.net') {
+        kofiWidgetOverlay.draw('aovault', {
+          'type': 'floating-chat',
+          'floating-chat.donateButton.text': 'Support',
+          'floating-chat.donateButton.background-color': '#F59E0B',
+          'floating-chat.donateButton.text-color': '#000000'
+        });
+      }
+    </script>
   </body>
 </html>

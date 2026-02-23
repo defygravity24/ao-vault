@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate AO Vault Icon</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: #1a1a1a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        canvas {
+            border: 2px solid #333;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .instructions {
+            text-align: center;
+            max-width: 600px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .instructions h1 {
+            color: white;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #333;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', monospace;
+            font-size: 14px;
+            color: #0fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1>AO Vault Icon Generator</h1>
+        <p>Click the button below to download your 1024×1024 icon</p>
+    </div>
+
+    <canvas id="iconCanvas" width="1024" height="1024"></canvas>
+
+    <button onclick="downloadIcon()">📥 Download icon-1024.png</button>
+
+    <div class="instructions">
+        <p style="margin-top: 20px;">After downloading, move the file to <code>~/Desktop/ao-vault/</code> and run the generator script.</p>
+    </div>
+
+    <script>
+        // Draw the icon on canvas
+        const canvas = document.getElementById('iconCanvas');
+        const ctx = canvas.getContext('2d');
+        const size = 1024;
+        const radius = size * 0.2275; // iOS corner radius
+
+        // Create gradient background
+        function drawRoundedRect(x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        // Draw background with gradient
+        const gradient = ctx.createLinearGradient(0, 0, 0, size);
+        gradient.addColorStop(0, '#ffffff');
+        gradient.addColorStop(1, '#f8f9fa');
+
+        drawRoundedRect(0, 0, size, size, radius);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Draw "AO" text
+        ctx.font = '300 360px -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif';
+        ctx.fillStyle = '#495057';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Adjust letter spacing manually
+        const aoText = 'AO';
+        const letterSpacing = -16;
+        let x = size / 2 - 20; // Slight adjustment for centering
+        const y = size / 2 - 60; // Position above center
+
+        // Draw A
+        ctx.fillText('A', x - (letterSpacing / 2) - 80, y);
+        // Draw O
+        ctx.fillText('O', x + (letterSpacing / 2) + 80, y);
+
+        // Draw "VAULT" text
+        ctx.font = '500 88px -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif';
+        ctx.fillStyle = '#6c757d';
+
+        // Draw VAULT with letter spacing
+        const vaultText = 'VAULT';
+        const vaultSpacing = 24;
+        const vaultY = size / 2 + 120;
+
+        // Calculate total width with spacing
+        const letters = vaultText.split('');
+        let totalWidth = 0;
+        ctx.font = '500 88px -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif';
+        letters.forEach(letter => {
+            totalWidth += ctx.measureText(letter).width + vaultSpacing;
+        });
+        totalWidth -= vaultSpacing; // Remove last spacing
+
+        // Draw each letter with spacing
+        let currentX = (size - totalWidth) / 2;
+        letters.forEach((letter, index) => {
+            ctx.fillText(letter, currentX + ctx.measureText(letter).width / 2, vaultY);
+            currentX += ctx.measureText(letter).width + vaultSpacing;
+        });
+
+        // Add subtle inner shadow effect
+        drawRoundedRect(0, 0, size, size, radius);
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.06)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Download function
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'icon-1024.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Auto-show the icon
+        canvas.style.width = '512px';
+        canvas.style.height = '512px';
+    </script>
+</body>
+</html>

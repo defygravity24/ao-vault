@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO Vault - Vault Icon Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 1400px;
+            width: 100%;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 40px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .icon-option {
+            text-align: center;
+        }
+
+        .icon-frame {
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 15px;
+            border-radius: 54px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            background: #000;
+        }
+
+        .icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Vault Design 1: Classic Bank Vault */
+        .vault-1 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            position: relative;
+        }
+
+        .vault-1 .vault-door {
+            width: 140px;
+            height: 140px;
+            border: 8px solid #FFD700;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle, #2a2a2a 0%, #1a1a1a 100%);
+            box-shadow:
+                inset 0 0 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .vault-1 .vault-handle {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #FFD700;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .vault-1 .vault-handle::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            background: #FFD700;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .vault-1 .ao-text {
+            position: absolute;
+            top: 20px;
+            color: #FFD700;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 8px;
+        }
+
+        /* Vault Design 2: Modern Minimal Vault */
+        .vault-2 {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .vault-2 .vault-icon {
+            font-size: 100px;
+            color: #FFD700;
+            position: relative;
+        }
+
+        .vault-2 .lock-overlay {
+            position: absolute;
+            font-size: 40px;
+            bottom: 40px;
+            right: 40px;
+            opacity: 0.8;
+        }
+
+        .vault-2 .ao-badge {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            padding: 5px 15px;
+            border: 1px solid #FFD700;
+            border-radius: 20px;
+        }
+
+        /* Vault Design 3: Current App Style */
+        .vault-3 {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .vault-3 .padlock {
+            width: 80px;
+            height: 100px;
+            position: relative;
+        }
+
+        .vault-3 .padlock-top {
+            width: 80px;
+            height: 50px;
+            border: 12px solid #FFD700;
+            border-bottom: none;
+            border-radius: 40px 40px 0 0;
+            margin-bottom: -5px;
+        }
+
+        .vault-3 .padlock-body {
+            width: 100px;
+            height: 70px;
+            background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .vault-3 .keyhole {
+            width: 20px;
+            height: 30px;
+            background: #0a0a0a;
+            border-radius: 10px 10px 15px 15px;
+        }
+
+        .vault-3 .app-name {
+            position: absolute;
+            bottom: 30px;
+            color: #FFD700;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        /* Vault Design 4: Safe Dial */
+        .vault-4 {
+            background: radial-gradient(circle, #2a2a2a 0%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .vault-4 .safe-dial {
+            width: 150px;
+            height: 150px;
+            border: 6px solid #FFD700;
+            border-radius: 50%;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            box-shadow:
+                inset 0 0 30px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .vault-4 .dial-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #FFD700 0%, #B8860B 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .vault-4 .dial-marks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vault-4 .dial-marks::before,
+        .vault-4 .dial-marks::after {
+            content: '';
+            position: absolute;
+            background: #FFD700;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .vault-4 .dial-marks::before {
+            width: 3px;
+            height: 20px;
+            top: 5px;
+        }
+
+        .vault-4 .dial-marks::after {
+            width: 3px;
+            height: 20px;
+            bottom: 5px;
+        }
+
+        /* Vault Design 5: Double Lock */
+        .vault-5 {
+            background: #000;
+            position: relative;
+        }
+
+        .vault-5 .double-lock {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .vault-5 .lock {
+            font-size: 60px;
+            color: #FFD700;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .vault-5 .plus {
+            font-size: 30px;
+            color: #FFD700;
+            opacity: 0.6;
+        }
+
+        .vault-5 .brand {
+            position: absolute;
+            top: 30px;
+            color: #FFD700;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        .vault-5 .tagline {
+            position: absolute;
+            bottom: 30px;
+            color: #666;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Vault Design 6: Geometric Vault */
+        .vault-6 {
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vault-6::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-300px, -300px); }
+            100% { transform: translate(300px, 300px); }
+        }
+
+        .vault-6 .hexagon {
+            width: 120px;
+            height: 140px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .vault-6 .hexagon::before,
+        .vault-6 .hexagon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        }
+
+        .vault-6 .hexagon::after {
+            background: #0a0a0a;
+            transform: scale(0.85);
+        }
+
+        .vault-6 .hex-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFD700;
+            font-size: 36px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .icon-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .icon-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFD700;
+        }
+
+        .current-app-reference {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .current-app-reference h2 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .current-app-reference p {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .instructions {
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .instructions h2 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #999;
+            line-height: 1.8;
+        }
+
+        code {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 AO VAULT</h1>
+        <p class="subtitle">Vault-Inspired Icon Designs</p>
+
+        <div class="current-app-reference">
+            <h2>Current App Design Reference</h2>
+            <p>Based on your app's dark theme with gold accents (#FFD700) and vault/security aesthetic</p>
+        </div>
+
+        <div class="icons-grid">
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon vault-1">
+                        <span class="ao-text">AO</span>
+                        <div class="vault-door">
+                            <div class="vault-handle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 1</div>
+                <div class="icon-name">Classic Bank Vault</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon vault-2">
+                        <span class="ao-badge">AO</span>
+                        <span class="vault-icon">🗄️</span>
+                        <span class="lock-overlay">🔒</span>
+                    </div>
+                </div>
+                <div class="icon-label">Design 2</div>
+                <div class="icon-name">Modern Vault</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon vault-3">
+                        <div class="padlock">
+                            <div class="padlock-top"></div>
+                            <div class="padlock-body">
+                                <div class="keyhole"></div>
+                            </div>
+                        </div>
+                        <span class="app-name">AOVAULT</span>
+                    </div>
+                </div>
+                <div class="icon-label">Design 3</div>
+                <div class="icon-name">Golden Padlock</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon vault-4">
+                        <div class="safe-dial">
+                            <div class="dial-marks"></div>
+                            <div class="dial-center">AO</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 4</div>
+                <div class="icon-name">Safe Dial</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon vault-5">
+                        <span class="brand">AO</span>
+                        <div class="double-lock">
+                            <span class="lock">🔒</span>
+                            <span class="plus">+</span>
+                            <span class="lock">📚</span>
+                        </div>
+                        <span class="tagline">VAULT</span>
+                    </div>
+                </div>
+                <div class="icon-label">Design 5</div>
+                <div class="icon-name">Security + Library</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon vault-6">
+                        <div class="hexagon">
+                            <span class="hex-text">AO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 6</div>
+                <div class="icon-name">Geometric Vault</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>🎨 Creating Your Vault Icon</h2>
+            <ol>
+                <li>Choose your favorite vault-inspired design above</li>
+                <li>Screenshot or recreate in your design tool at <code>1024x1024px</code></li>
+                <li>Use the exact colors: Black background <code>#0a0a0a</code> and Gold <code>#FFD700</code></li>
+                <li>Save as <code>icon-1024.png</code> (no transparency)</li>
+                <li>Run: <code>./generate-app-icons.sh</code> to create all sizes</li>
+            </ol>
+
+            <h2 style="margin-top: 25px;">💡 Design Philosophy</h2>
+            <p style="color: #999; line-height: 1.6; margin-top: 10px;">
+                These designs emphasize the "vault" concept - a secure, private place for your fanfiction collection.
+                The gold (#FFD700) on black creates a premium, secure feeling that matches your app's aesthetic.
+                The lock and vault imagery reinforces privacy and personal ownership of the library.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

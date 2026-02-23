@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO Vault - Current Style Icon Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .current-icon {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .current-icon h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .current-icon p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .icon-option {
+            text-align: center;
+        }
+
+        .icon-frame {
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 15px;
+            border-radius: 54px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Match Current Style 1: Light with Lock */
+        .current-1 {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .current-1 .icon-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .current-1 .lock-symbol {
+            font-size: 70px;
+            color: #495057;
+        }
+
+        .current-1 .text {
+            font-size: 24px;
+            font-weight: 500;
+            color: #343a40;
+            letter-spacing: 1px;
+        }
+
+        /* Match Current Style 2: Text Focus */
+        .current-2 {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f3f5 100%);
+        }
+
+        .current-2 .main-text {
+            font-size: 42px;
+            font-weight: 600;
+            color: #212529;
+            letter-spacing: -1px;
+        }
+
+        .current-2 .sub-text {
+            position: absolute;
+            bottom: 50px;
+            font-size: 14px;
+            color: #6c757d;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Match Current Style 3: Minimal Lock */
+        .current-3 {
+            background: #ffffff;
+        }
+
+        .current-3 .minimal-lock {
+            width: 70px;
+            height: 85px;
+            position: relative;
+        }
+
+        .current-3 .lock-top {
+            width: 60px;
+            height: 40px;
+            border: 8px solid #6c757d;
+            border-bottom: none;
+            border-radius: 30px 30px 0 0;
+            margin: 0 auto;
+        }
+
+        .current-3 .lock-bottom {
+            width: 70px;
+            height: 50px;
+            background: #6c757d;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .current-3 .lock-bottom::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 20px;
+            background: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 7px 7px 10px 10px;
+        }
+
+        .current-3 .brand {
+            position: absolute;
+            bottom: 45px;
+            font-size: 20px;
+            color: #495057;
+            letter-spacing: 2px;
+        }
+
+        /* Match Current Style 4: Clean Typography */
+        .current-4 {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .current-4 .ao-large {
+            font-size: 72px;
+            font-weight: 300;
+            color: #495057;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .current-4 .vault-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #6c757d;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Match Current Style 5: Icon + Text */
+        .current-5 {
+            background: #fafbfc;
+        }
+
+        .current-5 .combo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .current-5 .icon-part {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #495057;
+        }
+
+        .current-5 .text-part {
+            font-size: 22px;
+            font-weight: 500;
+            color: #343a40;
+            letter-spacing: 0.5px;
+        }
+
+        /* Match Current Style 6: Exact Match Attempt */
+        .current-6 {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3e7eb 100%);
+        }
+
+        .current-6 .exact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .current-6 .top-text {
+            font-size: 36px;
+            font-weight: 500;
+            color: #2c3e50;
+            letter-spacing: -0.5px;
+        }
+
+        .current-6 .bottom-text {
+            font-size: 36px;
+            font-weight: 500;
+            color: #2c3e50;
+            letter-spacing: -0.5px;
+        }
+
+        .current-6 .divider {
+            width: 60px;
+            height: 2px;
+            background: #95a5a6;
+            margin: 5px 0;
+        }
+
+        .icon-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .icon-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            color: #495057;
+        }
+
+        .color-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+        }
+
+        .color-note h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .color-note p {
+            color: #856404;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AOVault Icon - Matching Current Style</h1>
+        <p class="subtitle">Based on your current app icon with light/white aesthetic</p>
+
+        <div class="current-icon">
+            <h2>Your Current Icon Style</h2>
+            <p>I can see your current AOVault icon uses a clean, light design with subtle gradients.<br>
+            Here are variations that match and enhance that aesthetic.</p>
+        </div>
+
+        <div class="icons-grid">
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon current-1">
+                        <div class="icon-content">
+                            <span class="lock-symbol">🔒</span>
+                            <span class="text">AOVault</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Option 1</div>
+                <div class="icon-name">Lock + Text</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon current-2">
+                        <span class="main-text">AOVault</span>
+                        <span class="sub-text">Secure</span>
+                    </div>
+                </div>
+                <div class="icon-label">Option 2</div>
+                <div class="icon-name">Typography Focus</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon current-3">
+                        <div class="minimal-lock">
+                            <div class="lock-top"></div>
+                            <div class="lock-bottom"></div>
+                        </div>
+                        <span class="brand">AOVAULT</span>
+                    </div>
+                </div>
+                <div class="icon-label">Option 3</div>
+                <div class="icon-name">Minimal Lock</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon current-4">
+                        <span class="ao-large">AO</span>
+                        <span class="vault-text">VAULT</span>
+                    </div>
+                </div>
+                <div class="icon-label">Option 4</div>
+                <div class="icon-name">Clean Typography</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon current-5">
+                        <div class="combo">
+                            <div class="icon-part">🔐</div>
+                            <div class="text-part">AOVault</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Option 5</div>
+                <div class="icon-name">Icon + Text Combo</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon current-6">
+                        <div class="exact-content">
+                            <span class="top-text">AO</span>
+                            <div class="divider"></div>
+                            <span class="bottom-text">Vault</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Option 6</div>
+                <div class="icon-name">Split Design</div>
+            </div>
+        </div>
+
+        <div class="color-note">
+            <h3>📎 Color Palette for Current Style</h3>
+            <p>
+                <strong>Backgrounds:</strong> #f5f7fa to #ffffff (light gradients)<br>
+                <strong>Text:</strong> #2c3e50 to #495057 (dark grays)<br>
+                <strong>Accents:</strong> #6c757d (medium gray)<br>
+                <strong>Style:</strong> Clean, minimal, professional
+            </p>
+        </div>
+
+        <div class="instructions">
+            <h2>🎨 Creating Your Icon</h2>
+            <ol>
+                <li>Choose the design that best matches your vision</li>
+                <li>Create at <code>1024x1024px</code> in your design tool</li>
+                <li>Use subtle gradients for depth (not flat colors)</li>
+                <li>Keep text readable even at small sizes</li>
+                <li>Save as <code>icon-1024.png</code></li>
+                <li>Run the icon generator script</li>
+            </ol>
+
+            <h2 style="margin-top: 25px;">💡 Design Tips for App Store</h2>
+            <ol>
+                <li><strong>Simplicity wins</strong> - Your current style is perfect</li>
+                <li><strong>Test at 60px</strong> - Must be recognizable small</li>
+                <li><strong>Consistent with app</strong> - Match your app's UI</li>
+                <li><strong>Stand out</strong> - Light icons pop on dark App Store backgrounds</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

@@ -22,6 +22,12 @@ database/*.db
 .env.test.local
 .env.production.local
 
+# Credentials and sensitive data
+CREDENTIALS.md
+*_VERIFICATION.md
+*_stripe*
+*_STRIPE*
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
@@ -38,3 +44,4 @@ lerna-debug.log*
 # OS generated files
 Thumbs.db
 .DS_Store
+.vercel

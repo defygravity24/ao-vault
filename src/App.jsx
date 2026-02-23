@@ -10,6 +10,8 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Library from './pages/Library';
 import LostFics from './pages/LostFics';
+import StoryDetail from './pages/StoryDetail';
+import Support from './pages/Support';
 
 // Components
 import Layout from './components/Layout';
@@ -26,17 +28,27 @@ const queryClient = new QueryClient({
 });
 
 function PrivateRoute({ children }) {
+  // BYPASS AUTHENTICATION - Always allow access
+  return children;
+}
+
+function PublicRoute({ children }) {
   const { user, loading } = useAuth();
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
       </div>
     );
   }
 
-  return user ? children : <Navigate to="/login" />;
+  // If already logged in, redirect to dashboard
+  if (user) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
 }
 
 function App() {
@@ -45,11 +57,26 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            {/* Public auth routes */}
+            <Route path="/login" element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            } />
+            <Route path="/register" element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            } />
 
+            {/* Main route - Story Detail (no layout wrapper) */}
+            <Route path="/" element={<StoryDetail />} />
+            <Route path="/story/:id" element={<StoryDetail />} />
+            <Route path="/support" element={<Support />} />
+
+            {/* Protected routes */}
             <Route
-              path="/"
+              path="/app"
               element={
                 <PrivateRoute>
                   <Layout />

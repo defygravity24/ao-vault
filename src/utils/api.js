@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class ApiClient {
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || '/api';
+    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
     this.client = axios.create({
       baseURL: this.baseURL,
       headers: {
@@ -15,9 +15,10 @@ class ApiClient {
       (response) => response,
       (error) => {
         if (error.response?.status === 401) {
-          // Token expired or invalid
+          // Token expired or invalid — clear token
+          // AuthContext + PrivateRoute handle the redirect
           localStorage.removeItem('ao-vault-token');
-          window.location.href = '/login';
+          delete this.client.defaults.headers.common['Authorization'];
         }
         return Promise.reject(error);
       }

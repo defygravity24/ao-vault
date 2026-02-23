@@ -49,6 +49,7 @@ export default function Layout() {
           <div className="flex items-center justify-center h-16 border-b border-gray-800">
             <Link to="/" className="flex items-center justify-center">
               <BookOpen className="w-8 h-8 text-purple-500" />
+            </Link>
             <button
               className="lg:hidden"
               onClick={() => setSidebarOpen(false)}
@@ -65,76 +66,36 @@ export default function Layout() {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
+                  className={`flex items-center justify-center w-12 h-12 rounded-lg transition-colors ${
                     isActive(item.href)
-                      ? 'bg-primary-50 text-primary-600'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-purple-600/20 text-purple-400'
+                      : 'text-gray-400 hover:bg-gray-800 hover:text-gray-300'
                   }`}
+                  title={item.name}
                 >
-                  <Icon className="w-5 h-5 mr-3" />
-                  {item.name}
+                  <Icon className="w-5 h-5" />
                 </Link>
               );
             })}
           </nav>
 
           {/* User section */}
-          <div className="p-4 border-t">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
-                  <User className="w-6 h-6 text-primary-600" />
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-900">
-                    {user?.displayName || user?.username}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {user?.isPremium ? 'Premium' : 'Free'} Account
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={logout}
-                className="p-2 text-gray-500 hover:text-gray-700"
-                title="Logout"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-            </div>
+          <div className="p-4 border-t border-gray-800">
+            <button
+              onClick={logout}
+              className="flex items-center justify-center w-12 h-12 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-gray-300 transition-colors"
+              title="Logout"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
-        {/* Top bar */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="flex items-center justify-between h-16 px-6">
-            <button
-              className="lg:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu className="w-6 h-6 text-gray-600" />
-            </button>
-
-            <div className="flex-1 max-w-2xl mx-4">
-              {/* Quick search bar can go here */}
-            </div>
-
-            {/* Quick add button */}
-            <button
-              onClick={() => setShowAddModal(true)}
-              className="flex items-center px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
-            >
-              <Plus className="w-5 h-5 mr-2" />
-              Add Fanfic
-            </button>
-          </div>
-        </header>
-
+      <div className="lg:pl-20">
         {/* Page content */}
-        <main className="p-6">
+        <main className="min-h-screen">
           <Outlet context={{ showAddModal, setShowAddModal }} />
         </main>
       </div>

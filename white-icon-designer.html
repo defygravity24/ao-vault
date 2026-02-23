@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO Vault - White Icon Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 40px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .icon-option {
+            text-align: center;
+        }
+
+        .icon-frame {
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 15px;
+            border-radius: 54px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* White Icon 1: Clean Padlock */
+        .white-1 {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .white-1 .padlock {
+            width: 90px;
+            height: 110px;
+            position: relative;
+        }
+
+        .white-1 .padlock-top {
+            width: 70px;
+            height: 45px;
+            border: 10px solid #e0e0e0;
+            border-bottom: none;
+            border-radius: 35px 35px 0 0;
+            margin: 0 auto;
+            margin-bottom: -2px;
+        }
+
+        .white-1 .padlock-body {
+            width: 90px;
+            height: 65px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .white-1 .keyhole {
+            width: 18px;
+            height: 28px;
+            background: #2a2a2a;
+            border-radius: 9px 9px 12px 12px;
+        }
+
+        /* White Icon 2: Minimalist Lock */
+        .white-2 {
+            background: #1f1f1f;
+            position: relative;
+        }
+
+        .white-2 .lock-outline {
+            width: 100px;
+            height: 120px;
+            position: relative;
+        }
+
+        .white-2 .lock-arc {
+            width: 80px;
+            height: 50px;
+            border: 8px solid #ffffff;
+            border-bottom: none;
+            border-radius: 40px 40px 0 0;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .white-2 .lock-base {
+            width: 100px;
+            height: 70px;
+            background: #ffffff;
+            opacity: 0.95;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .white-2 .lock-base::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: #1f1f1f;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px 10px 15px 15px;
+        }
+
+        .white-2 .ao-text {
+            position: absolute;
+            bottom: 35px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+
+        /* White Icon 3: Silver Vault */
+        .white-3 {
+            background: radial-gradient(circle, #2d2d2d 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .white-3 .vault-door {
+            width: 140px;
+            height: 140px;
+            border: 6px solid #c0c0c0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8e8e8 0%, #b8b8b8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow:
+                inset 0 0 20px rgba(0, 0, 0, 0.2),
+                0 0 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .white-3 .vault-center {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #f0f0f0 0%, #d0d0d0 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a2a2a;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* White Icon 4: Modern White */
+        .white-4 {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            position: relative;
+        }
+
+        .white-4 .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .white-4 .main-lock {
+            font-size: 80px;
+            color: #f0f0f0;
+            filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .white-4 .brand-text {
+            color: #f0f0f0;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        /* White Icon 5: Frosted Glass */
+        .white-5 {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .white-5 .frosted-panel {
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .white-5 .lock-icon {
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .white-5 .ao-label {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* White Icon 6: Pure Minimal */
+        .white-6 {
+            background: #000000;
+            position: relative;
+        }
+
+        .white-6 .centered-lock {
+            width: 120px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .white-6 .lock-shackle {
+            width: 60px;
+            height: 40px;
+            border: 12px solid #ffffff;
+            border-bottom: none;
+            border-radius: 30px 30px 0 0;
+            margin-bottom: -4px;
+        }
+
+        .white-6 .lock-body {
+            width: 80px;
+            height: 60px;
+            background: #ffffff;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .white-6 .lock-body::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 24px;
+            background: #000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px 8px 12px 12px;
+        }
+
+        .white-6 .minimal-text {
+            position: absolute;
+            bottom: 40px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 200;
+            letter-spacing: 5px;
+        }
+
+        .icon-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .icon-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .reference {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .reference h2 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .reference p {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .instructions h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #999;
+            line-height: 1.8;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤍 AO VAULT - WHITE DESIGNS</h1>
+        <p class="subtitle">Clean, Modern Lock Icons</p>
+
+        <div class="reference">
+            <h2>White/Silver Theme</h2>
+            <p>Based on your request for white-looking designs - clean, modern, minimalist lock icons</p>
+        </div>
+
+        <div class="icons-grid">
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon white-1">
+                        <div class="padlock">
+                            <div class="padlock-top"></div>
+                            <div class="padlock-body">
+                                <div class="keyhole"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 1</div>
+                <div class="icon-name">Clean White Lock</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon white-2">
+                        <div class="lock-outline">
+                            <div class="lock-arc"></div>
+                            <div class="lock-base"></div>
+                        </div>
+                        <span class="ao-text">AOVAULT</span>
+                    </div>
+                </div>
+                <div class="icon-label">Design 2</div>
+                <div class="icon-name">Minimalist White</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon white-3">
+                        <div class="vault-door">
+                            <div class="vault-center">AO</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 3</div>
+                <div class="icon-name">Silver Vault</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon white-4">
+                        <div class="icon-container">
+                            <span class="main-lock">🔒</span>
+                            <span class="brand-text">AOVAULT</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 4</div>
+                <div class="icon-name">Modern White</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon white-5">
+                        <div class="frosted-panel">
+                            <span class="lock-icon">🔐</span>
+                            <span class="ao-label">AO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="icon-label">Design 5</div>
+                <div class="icon-name">Frosted Glass</div>
+            </div>
+
+            <div class="icon-option">
+                <div class="icon-frame">
+                    <div class="icon white-6">
+                        <div class="centered-lock">
+                            <div class="lock-shackle"></div>
+                            <div class="lock-body"></div>
+                        </div>
+                        <span class="minimal-text">VAULT</span>
+                    </div>
+                </div>
+                <div class="icon-label">Design 6</div>
+                <div class="icon-name">Pure Minimal</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>🎨 Creating Your White Icon</h2>
+            <ol>
+                <li>Choose your favorite white/silver design above</li>
+                <li>Screenshot or recreate in your design tool at <code>1024x1024px</code></li>
+                <li>Color palette: White <code>#ffffff</code>, Silver <code>#e0e0e0</code>, Dark bg <code>#1a1a1a</code></li>
+                <li>Save as <code>icon-1024.png</code> (no transparency)</li>
+                <li>Run: <code>./generate-app-icons.sh</code> to create all sizes</li>
+            </ol>
+
+            <h2 style="margin-top: 25px;">💡 Design Notes</h2>
+            <p style="color: #999; line-height: 1.6; margin-top: 10px;">
+                These white/silver designs provide a clean, modern aesthetic while maintaining the security theme.
+                The contrast between the white lock and dark background creates strong visual impact,
+                making the icon easily recognizable even at small sizes.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

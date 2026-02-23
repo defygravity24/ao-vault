@@ -210,7 +210,7 @@ function FanficCard({ fanfic }) {
               : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
           }`}
         >
-          {gaveThanks ? '✓ Thanks!' : '🙏 Thanks'}
+          {gaveThanks ? '✓ Thanks Given!' : 'Give Thanks'}
         </button>
         <button
           onClick={handleMarkHorny}
@@ -222,9 +222,14 @@ function FanficCard({ fanfic }) {
         >
           {isHorny ? '🔥 Horny!' : '🔥 Horny'}
         </button>
-        <button className="px-3 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 text-xs font-medium">
+        <a
+          href={fanfic ? fanfic.url : '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 text-xs font-medium inline-block text-center"
+        >
           Read →
-        </button>
+        </a>
       </div>
     </div>
   );
@@ -293,7 +298,7 @@ function DemoCard({ title, author, tags, progress = 0, isCompleted = false }) {
               : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
           }`}
         >
-          {gaveThanks ? '✓ Thanks!' : '🙏 Thanks'}
+          {gaveThanks ? '✓ Thanks Given!' : 'Give Thanks'}
         </button>
         <button
           onClick={() => setIsHorny(!isHorny)}
@@ -305,9 +310,14 @@ function DemoCard({ title, author, tags, progress = 0, isCompleted = false }) {
         >
           {isHorny ? '🔥 Horny!' : '🔥 Horny'}
         </button>
-        <button className="px-3 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 text-xs font-medium">
+        <a
+          href={fanfic ? fanfic.url : '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 text-xs font-medium inline-block text-center"
+        >
           Read →
-        </button>
+        </a>
       </div>
     </div>
   );
